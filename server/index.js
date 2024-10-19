@@ -3,7 +3,13 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-
+app.use(cors(
+  {
+    origin: {"https://hotel-backend-xi.vercel.app"},
+    methods: {"POST", "GET", "DELETE", "PUT"},
+    credentials: true
+  }
+));
 import adminRoutes from "./routes/adminRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
