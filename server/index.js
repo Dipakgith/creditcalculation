@@ -9,7 +9,7 @@ import studentRoutes from "./routes/studentRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
 import { addDummyAdmin } from "./controller/adminController.js";
 
-async function startserver() {
+async function startServer() {
   try {
     const app = express();
     dotenv.config();
@@ -25,19 +25,19 @@ async function startserver() {
     app.get("/", (req, res) => {
       res.send("Hello to college erp API");
     });
-    mongoose
-      .connect(process.env.CONNECTION_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then(() => {
-        addDummyAdmin();
-        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-      })
-      .catch((error) => console.log("Mongo Error", error.message));
-  } catch (e) {
-    console.log(e);
+
+    await mongoose.connect(process.env.CONNECTION_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log(process.env.CONNECTION_URL);
+    await addDummyAdmin();
+
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  } catch (error) {
+    console.error("Error:", error);
   }
 }
 
-startserver();
+startServer();
