@@ -10,6 +10,10 @@ import facultyRoutes from "./routes/facultyRoutes.js";
 import { addDummyAdmin } from "./controller/adminController.js";
 const app = express();
 dotenv.config();
+
+
+async function startserver(){
+  try{
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
@@ -32,3 +36,9 @@ mongoose
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((error) => console.log("Mongo Error", error.message));
+}catch(e){
+  console.log(e);
+}
+}
+
+startserver();
